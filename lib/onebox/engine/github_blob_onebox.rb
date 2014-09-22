@@ -69,7 +69,7 @@ module Onebox
 
       private
       @selected_lines_array  = nil
-
+      @selected_one_liner = 0
       def calc_range(m,contents_lines_size)
         #author Lidlanca  09/15/2014
         truncated = false
@@ -98,7 +98,7 @@ module Onebox
         to   = contents_lines_size if to > contents_lines_size   #if "to" is out of TOP bound set to last line.
         
         if one_liner
-          selected_one_liner = from
+          @selected_one_liner = from
           if EXPAND_ONE_LINER != EXPAND_NONE
             if (EXPAND_ONE_LINER & EXPAND_BEFORE != 0) # check if EXPAND_BEFORE flag is on
               from = [1, from - LINES_BEFORE].max      # make sure expand before does not go out of bound
@@ -123,7 +123,7 @@ module Onebox
         {:from               => from,
          :to                 => to,
          :one_liner          => one_liner,
-         :selected_one_liner => selected_one_liner, 
+         :selected_one_liner => @selected_one_liner, 
          :range_provided     => range_provided,
          :truncated          => truncated}
       end
@@ -196,6 +196,7 @@ module Onebox
                    content: raw,
                    lines:  @selected_lines_array ,
                    has_lines: !@selected_lines_array.nil?,
+                   selected_one_liner: @selected_one_liner,
                    truncated: @truncated}
       end
 
