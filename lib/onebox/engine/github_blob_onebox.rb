@@ -68,6 +68,7 @@ module Onebox
       end
 
       private
+      @selected_lines_array  = nil
 
       def calc_range(m,contents_lines_size)
         #author Lidlanca  09/15/2014
@@ -194,6 +195,7 @@ module Onebox
                    link: link,
                    content: raw,
                    lines:  @selected_lines_array ,
+                   has_lines: !@selected_lines_array.nil?,
                    truncated: @truncated}
       end
 
