@@ -39,26 +39,7 @@ console.log(d)
 
 
 <a class="show-lines" onclick="onebox_show_code_line_number()">Show Lines</a>
-<pre>
-<code class="{{lang}}" style="white-space:normal">
-<table cellpadding="0" cellspacing="0" class="lines nolines" >
-<tbody>
-{{/has_lines}}
-{{#lines}}
-<tr {{#selected}}class="selected"{{/selected}} {{#selected}}style="background:#cfc"{{/selected}}>
-<td line_number="{{line_number}}" class="line-number{{#selected}} selected{{/selected}}" style='padding:0px 5px 0px 5px'>
-</td>
-<td class="line-data" style='padding-left:5px;'>
-<div class="line{{#selected}} selected{{/selected}}">{{data}}</div>
-</td>
-</tr>
-{{/lines}}
-{{#has_lines}}
-</tbody>
-</table>
-{{/has_lines}}
-</code>
-</pre>
+<pre><code class="{{lang}}" style="white-space:normal"><table cellpadding="0" cellspacing="0" class="lines nolines"><tbody>{{/has_lines}}{{#lines}}<tr{{#selected}} class="selected"{{/selected}}{{#selected}} style="background:#cfc"{{/selected}}><td line_number="{{line_number}}" class="line-number{{#selected}} selected{{/selected}}" style='padding:0px 5px 0px 5px'></td><td class="line-data" style='padding-left:5px;'><div class="line{{#selected}} selected{{/selected}}">{{data}}</div></td></tr>{{/lines}}{{#has_lines}}</tbody></table>{{/has_lines}}</code></pre>
 
 {{#truncated}}
   This file has been truncated. <a href="{{link}}" target="_blank">show original</a>
