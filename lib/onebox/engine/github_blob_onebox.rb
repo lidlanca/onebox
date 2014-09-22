@@ -128,8 +128,7 @@ module Onebox
       end
 
 
-      def line_number_helper(lines,start) 
-        selected =5
+      def line_number_helper(lines,start,selected) 
         #author Lidlanca  09/15/2014
         hash_builder =[]
         output_builder = []
@@ -144,13 +143,11 @@ module Onebox
 
       def raw
         options_id = self.class.name.split("::").last.to_s  #get class name without module namespace
-
-
-        
         # puts Onebox.options.inspect
 
         return @raw if @raw
         m = @url.match(/github\.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+)\/blob\/(?<sha1>[^\/]+)\/(?<file>[^#]+)(#(L(?<from>[^-]*)(-L(?<to>.*))?))?/mi)
+
         if m
           from = /\d+/.match(m[:from])   #get numeric should only match a positive interger
           to   = /\d+/.match(m[:to])     #get numeric should only match a positive interger
@@ -158,21 +155,21 @@ module Onebox
           @file = m[:file]
           contents = open("https://raw.github.com/#{m[:user]}/#{m[:repo]}/#{m[:sha1]}/#{m[:file]}", read_timeout: timeout).read
           
-          contents_lines = contents.lines 
-          contents_lines_size = contents_lines.size
+          contents_lines = contents.lines           #get contents lines 
+          contents_lines_size = contents_lines.size #get number of lines
             
-          cr = calc_range(m,contents_lines_size)
-          # puts "SELECTED LINE" + cr[:selected_one_liner].to_s
-          from           = cr[:from]
-          to             = cr[:to]
-          @truncated     = cr[:truncated]
-          range_provided = cr[:range_provided]
-          one_liner      = cr[:one_liner]
+          cr = calc_range(m,contents_lines_size)    #calculate the range of lines for output
+            selected_one_liner = cr[:selected_one_liner] #if url is a one-liner calc_range will return it
+            # puts "SELECTED LINE" + cr[:selected_one_liner].to_s
+            from           = cr[:from]
+            to             = cr[:to]
+            @truncated     = cr[:truncated]
+            range_provided = cr[:range_provided]
+            one_liner      = cr[:one_liner]
 
-          if range_provided
-
+          if range_provided       #if a range provided
             if SHOW_LINE_NUMBER
-              lines_result = line_number_helper(contents_lines[from-1..to-1], from)  #print code with prefix line numbers in case range provided
+              lines_result = line_number_helper(contents_lines[from-1..to-1], from, selected_one_liner)  #print code with prefix line numbers in case range provided
               contents = lines_result[:output]
               @selected_lines_array = lines_result[:array] 
             else 
