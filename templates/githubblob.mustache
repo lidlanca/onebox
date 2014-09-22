@@ -1,64 +1,6 @@
 <h4><a href="{{link}}" target="_blank">{{title}}</a></h4>
 
-{{#avoid-for-now}}
-<pre><code class='{{lang}}'>{{content}}</code></pre>
-{{/avoid-for-now}}
-
-{{#avoid-for-now}}
-
-<style>
-.line-number {
-	display:block;	
-	font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
-	}
-}
-
-</style>
-
-<table>
-<tr>
-<td style='vertical-align:top;text-align: right;'>
-<div>
-  	{{#lines}} 
-  	<span class="line-number{{#selected}} selected{{/selected}}" style=''>{{line_number}}:</span>{{/lines}}
-  	{{selected}}
-</div>
-</td>
-<td>
-<pre style='margin-top:0px'><code style='padding-top:0px' class='{{lang}}'>{{content}}</code></pre>
-</td>
-</table>
-
-
-
-
-{{/avoid-for-now}}
-
-
-
-
-
-<a class="show-lines" onclick="showLines()">Show Lines</a>
-<pre>
-<code class="php" style="white-space:normal">
-<table cellpadding="0" cellspacing="0" class="lines nolines" >
-<tbody>
 {{#lines}}
-<tr {{#selected}}class="selected"{{/selected}} {{#selected}}style="background:#cfc"{{/selected}}>
-<td line_number="{{line_number}}" class="line-number{{#selected}} selected{{/selected}}" style='padding:0px 5px 0px 5px'>
-<!--<div class="nohighlight line-number{{#selected}} selected{{/selected}}" style=''>#{{line_number}}:--></div>
-</td>
-
-<td class="line-data" style='padding-left:5px;'>
-<div class="line{{#selected}} selected{{/selected}}">{{data}}</div>
-</td>
-</tr>
-{{/lines}}
-</tbody>
-</table>
-</code>
-</pre>
-
 <script>
 
 function onebox_show_code_line_number (){
@@ -88,6 +30,44 @@ console.log(d)
 
 },1000);
 </script>
+{{/lines}}
+
+
+<a class="show-lines" onclick="showLines()">Show Lines</a>
+<pre>
+<code class="php" style="white-space:normal">
+
+{{^lines}}
+{{content}}
+{{/lines}}
+
+{{#lines}}
+<table cellpadding="0" cellspacing="0" class="lines nolines" >
+<tbody>
+{{/lines}}
+
+{{#lines}}
+<tr {{#selected}}class="selected"{{/selected}} {{#selected}}style="background:#cfc"{{/selected}}>
+<td line_number="{{line_number}}" class="line-number{{#selected}} selected{{/selected}}" style='padding:0px 5px 0px 5px'>
+<!--<div class="nohighlight line-number{{#selected}} selected{{/selected}}" style=''>#{{line_number}}:--></div>
+</td>
+
+<td class="line-data" style='padding-left:5px;'>
+<div class="line{{#selected}} selected{{/selected}}">{{data}}</div>
+</td>
+</tr>
+{{/lines}}
+
+{{#lines}}
+</tbody>
+</table>
+{{/lines}}
+
+
+</code>
+</pre>
+
+
 
 {{#truncated}}
   This file has been truncated. <a href="{{link}}" target="_blank">show original</a>
