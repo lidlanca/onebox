@@ -1,6 +1,11 @@
 <h4><a href="{{link}}" target="_blank">{{title}}</a></h4>
 
-{{#lines}}
+{{^lines}}
+{{content}}
+{{/lines}}
+
+
+{{#has_lines}}
 <script>
 
 function onebox_show_code_line_number (){
@@ -30,21 +35,19 @@ console.log(d)
 
 },1000);
 </script>
-{{/lines}}
 
 
 <a class="show-lines" onclick="showLines()">Show Lines</a>
 <pre>
 <code class="php" style="white-space:normal">
 
-{{^lines}}
-{{content}}
-{{/lines}}
+{{/has_lines}}
 
-{{#lines}}
+
+{{#has_lines}}
 <table cellpadding="0" cellspacing="0" class="lines nolines" >
 <tbody>
-{{/lines}}
+{{/has_lines}}
 
 {{#lines}}
 <tr {{#selected}}class="selected"{{/selected}} {{#selected}}style="background:#cfc"{{/selected}}>
@@ -58,10 +61,10 @@ console.log(d)
 </tr>
 {{/lines}}
 
-{{#lines}}
+{{#has_lines}}
 </tbody>
 </table>
-{{/lines}}
+{{/has_lines}}
 
 
 </code>
