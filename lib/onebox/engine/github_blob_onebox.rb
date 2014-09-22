@@ -167,7 +167,7 @@ module Onebox
             @truncated     = cr[:truncated]
             range_provided = cr[:range_provided]
             one_liner      = cr[:one_liner]
-
+            @cr_results = cr
           if range_provided       #if a range provided
             if SHOW_LINE_NUMBER
               lines_result = line_number_helper(contents_lines[from-1..to-1], from, selected_one_liner)  #print code with prefix line numbers in case range provided
@@ -197,6 +197,7 @@ module Onebox
                    lines:  @selected_lines_array ,
                    has_lines: !@selected_lines_array.nil?,
                    selected_one_liner: @selected_one_liner,
+                   cr_results:@cr_results,
                    truncated: @truncated}
       end
 
