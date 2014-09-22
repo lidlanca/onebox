@@ -51,7 +51,7 @@ pre.onebox ol li:before {
     <code class='hljs' style='white-space: normal;padding:0px;margin:0px;'>
 <ol  class='start' start="{{cr_results.from_minus_one}}" style='counter-reset: li-counter {{cr_results.from_minus_one}} ;'>
 {{#lines}}
-<li>{{data}}</li>
+<li{{#selected}} class="selected"{{/selected}}>{{data}}</li>
 {{/lines}}
 </ol>
     </code>
