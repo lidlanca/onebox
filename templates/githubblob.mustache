@@ -8,24 +8,32 @@
 {{/has_lines}}
 
 
+{{#has_lines}}
 <script>
-{{! 
+{{!
 /*
 Author: Lidlanca 2014
 $.Onebox JS Helper
-Note: $.Onebox should be defined globally and not as part of a generated onebox
-but it is safe to append it multiple times. 
-$.onebox can only be defined once, and styles can not be overwritten unless first removed.
-
-Styles tag are given a unique id based on a prefix and the given style name.
+ 
+Usage
+Load $.Onebox definition once. 
+ 
+In the onebox template use
+$.Onebox.loadStyle("style_name",cssRule);
+ 
+$.Onebox definition can be included in the code multiple times. it will not override it self.
+styles can not be overwritten either unless removed first.
+ 
+Styles tag are given a unique id based on a (prefix + style name)
 Use a unique prefix to avoid ID collision.
-
+ 
 Methods
- removeStyle      remove a style from dom
  loadStyle        load new style if not already exists or loaded
- appendStyle      append style to dom
+ removeStyle      remove a previously loaded style from DOM
+ appendStyle      append style to dom (used by LoadStyle Internally)
  listLoadedStyles trace all styles in console
 
+Unminified Version of $.Onebox can be found here.
 https://gist.github.com/lidlanca/5a17d77ed8654d408e54
 */
 }}
@@ -33,60 +41,9 @@ https://gist.github.com/lidlanca/5a17d77ed8654d408e54
 cssRule="pre.onebox ol{background:#EBEBEB;padding-top:5px;padding-bottom:5px;overflow:auto;color:#fff;word-break:break-word;padding-left:5px;margin:0;counter-reset:li-counter;list-style-type:none}pre.onebox ol li{background:#fff;font-size:small;color:#000;border-bottom:1px solid #E3E3E3;width:inherit;padding-left:45px;position:relative}pre.onebox ol li.selected{background-color:#F8EEC7}pre.onebox ol li:before{background-color:#cfcfcf;position:absolute;left:0;width:40px;display:inline-block;color:#fff;font-weight:700;text-align:right;z-index:1;overflow:hidden;content:counter(li-counter);counter-increment:li-counter}pre.onebox code{white-space:normal;padding:0;margin:0;position:relative}pre.onebox{white-space:normal}";
 $.Onebox.loadStyle("code_lines",cssRule)
 </script>
-
+{{/has_lines}}
 
 {{#has_lines}}
-{{#hide_for_now}}
-<style>
-
-pre.onebox ol { background:#EBEBEB;
-    padding-top:5px;
-    padding-bottom:5px;
-    overflow:auto;
-    color:#fff; 
-    word-break: break-word;
-    padding-left:5px;
-    margin:0;
-    counter-reset: li-counter;
-    list-style-type: none;
-} 
-pre.onebox ol li { 
-	background:#fff; font-size:small;color:#000;
-    border-bottom:1px solid #E3E3E3;
-    width:inherit;
-    padding-left:45px;
-    position:relative;
-}
-
-pre.onebox ol li.selected{
-	background-color:#F8EEC7;
-}
-
-pre.onebox ol li:before {
-    background-color:#cfcfcf;
-    position: absolute;
-	left:0px;
-	width: 40px;
-    display:inline-block;
-    color:#fff;
-    text-align:right;
-    font-weight: bold;
-    text-align: right;
-    z-index: 1;
-    overflow: hidden;
-    content: counter(li-counter);
-    counter-increment: li-counter;
-}
-pre.onebox code {
-	white-space: normal;padding:0px;margin:0px;position:relative;
-}
-pre.onebox {
-	white-space: normal
-}
-
-</style>
-{{/hide_for_now}}
-
 <pre class='onebox' >
     <code class='hljs' >
 <ol  class='start' start="{{cr_results.from}}" style='counter-reset: li-counter {{cr_results.from_minus_one}} ;'>
@@ -96,7 +53,6 @@ pre.onebox {
 </ol>
     </code>
 </pre>
-
 {{/has_lines}}
 
 
