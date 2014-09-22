@@ -50,7 +50,7 @@ module Onebox
         # We can define constant automatically.  redefine a constant may occur 
         options.each_pair {|constant_name,value|
           constant_name_u = constant_name.to_s.upcase
-          puts constant_name_u + ":" +  value.to_s
+          # puts constant_name_u + ":" +  value.to_s
               if constant_name_u == constant_name.to_s
                 #define a constant if not already defined
                 self.class.const_set  constant_name_u.to_sym , options[constant_name_u.to_sym]  unless self.class.const_defined? constant_name_u.to_sym
@@ -146,7 +146,7 @@ module Onebox
 
 
         
-        puts Onebox.options.inspect
+        # puts Onebox.options.inspect
 
         return @raw if @raw
         m = @url.match(/github\.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+)\/blob\/(?<sha1>[^\/]+)\/(?<file>[^#]+)(#(L(?<from>[^-]*)(-L(?<to>.*))?))?/mi)
@@ -161,7 +161,7 @@ module Onebox
           contents_lines_size = contents_lines.size
             
           cr = calc_range(m,contents_lines_size)
-          puts "SELECTED LINE" + cr[:selected_one_liner].to_s
+          # puts "SELECTED LINE" + cr[:selected_one_liner].to_s
           from           = cr[:from]
           to             = cr[:to]
           @truncated     = cr[:truncated]
