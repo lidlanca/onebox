@@ -121,7 +121,7 @@ module Onebox
         end
 
         {:from               => from,
-         :from_minus_one    => from-1
+         :from_minus_one    => from-1,
          :to                 => to,
          :one_liner          => one_liner,
          :selected_one_liner => @selected_one_liner, 
@@ -205,4 +205,3 @@ module Onebox
     end
   end
 end
-
