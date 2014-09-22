@@ -27,6 +27,7 @@ module Onebox
       end
       
       def options=(opt)
+        return if opt.nil?
         if opt.instance_of? OpenStruct
           @@options = DEFAULTS.merge(opt.to_h)   
         else
