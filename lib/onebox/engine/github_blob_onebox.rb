@@ -4,9 +4,6 @@ module Onebox
       include Engine
       include LayoutSupport
 
-      # MAX_LINES = 20
-      # MAX_CHARS = 5000
-
       EXPAND_AFTER = 0b001 
       EXPAND_BEFORE = 0b010
       EXPAND_NONE = 0b0
@@ -27,7 +24,7 @@ module Onebox
       end
       
       def options=(opt)
-        return if opt.nil?
+        return if opt.nil? #make sure options exists 
         if opt.instance_of? OpenStruct
           @@options = DEFAULTS.merge(opt.to_h)   
         else
@@ -48,23 +45,14 @@ module Onebox
         
 
         # Define constant after merging options set in Onebox.options
-        # We can define constant automatically.  redefine a constant may occur 
+        # We can define constant automatically. 
         options.each_pair {|constant_name,value|
           constant_name_u = constant_name.to_s.upcase
-          # puts constant_name_u + ":" +  value.to_s
               if constant_name_u == constant_name.to_s
                 #define a constant if not already defined
                 self.class.const_set  constant_name_u.to_sym , options[constant_name_u.to_sym]  unless self.class.const_defined? constant_name_u.to_sym
               end
         }
-        # We can define constant manually 
-        # self.class.const_set  :SHOW_LINE_NUMBER , options[:SHOW_LINE_NUMBER]
-        # self.class.const_set  :EXPAND_ONE_LINER , options[:EXPAND_ONE_LINER]
-        # self.class.const_set  :LINES_BEFORE , options[:LINES_BEFORE]
-        # self.class.const_set  :LINES_AFTER , options[:LINES_AFTER]
-        # self.class.const_set  :MAX_LINES , options[:MAX_LINES]
-        # self.class.const_set  :MAX_CHARS , options[:MAX_CHARS]
-        
       end
 
       private
@@ -120,12 +108,12 @@ module Onebox
          to = from + MAX_LINES-1  
         end
 
-        {:from               => from,
-         :from_minus_one    => from-1,
-         :to                 => to,
-         :one_liner          => one_liner,
-         :selected_one_liner => @selected_one_liner, 
-         :range_provided     => range_provided,
+        {:from               => from,                 #calculated from
+         :from_minus_one    => from-1,                #used for getting currect ol>li numbering with css used in template
+         :to                 => to,                   #calculated to
+         :one_liner          => one_liner,            #boolean if a one-liner
+         :selected_one_liner => @selected_one_liner,  #if a one liner is provided we create a reference for it.
+         :range_provided     => range_provided,       #boolean if range provided 
          :truncated          => truncated}
       end
 
@@ -169,7 +157,7 @@ module Onebox
             range_provided = cr[:range_provided]
             one_liner      = cr[:one_liner]
             @cr_results = cr
-          if range_provided       #if a range provided
+          if range_provided       #if a range provided (single line or more)
             if SHOW_LINE_NUMBER
               lines_result = line_number_helper(contents_lines[from-1..to-1], from, selected_one_liner)  #print code with prefix line numbers in case range provided
               contents = lines_result[:output]
