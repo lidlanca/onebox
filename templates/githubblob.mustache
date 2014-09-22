@@ -44,26 +44,26 @@ console.log(d)
 
 
 <style>
-pre ol { background:#EBEBEB;
+pre.onebox ol { background:#EBEBEB;
     padding-top:5px;
     padding-bottom:5px;
     overflow:auto;
     font-family:"Courier New",Courier,mono; margin:0;
-    color:#fff; width:90%;
+    color:#fff; 
     word-break: break-word;
     padding-left:45px;
     margin:0;
 } 
-pre ol li { background:#fff; font-size:small;color:#000;
+pre.onebox ol li { background:#fff; font-size:small;color:#000;
     border-bottom:1px solid #E3E3E3;
     width:99%;
       padding-left:5px;
 }
-pre ol {
+pre.onebox ol {
     counter-reset: li-counter;
     list-style-type: none;
 }
-pre li:before {
+pre.onebox ol li:before {
     background-color:#cfcfcf;
     position: absolute;
     left:15px;
@@ -80,7 +80,7 @@ pre li:before {
     
 }
 </style>
-<pre style='white-space: normal'>
+<pre class='onebox' style='white-space: normal'>
     <code class='hljs' style='white-space: normal;padding:0px;margin:0px;'>
 <ol  class='start' start="{{selected_one_liner}}" style='counter-reset: li-counter {{selected_one_liner}};'>
 {{#lines}}
