@@ -243,7 +243,12 @@ module Onebox
 
 
         if video_url
-          html = "<iframe src=\"#{video_url}\" frameborder=\"0\" title=\"#{data[:title]}\""
+          #original reference
+          # html = "<iframe src=\"#{video_url}\" frameborder=\"0\" title=\"#{data[:title]}\""
+
+          html = %Q(<style>html,body{padding:0px;margin:0px;</style><video style="width:100%;max-height:100%;" controls=""><source src="#{video_url}"></video>)
+          html = 'data:text/html;charset=utf-8,' + URI.escape(html)
+          html = %Q(<iframe src="#{html}" frameborder="0" title="#{data[:title]}" )
 
           append_attribute(:width, html, video)
           append_attribute(:height, html, video)
